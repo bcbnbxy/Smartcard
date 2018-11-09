@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/mall/mallindex",
+    "pages/company/company",
+    "pages/student/student"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "智慧名片",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#BEC2CC",
+    "selectedColor": "#1AAD19",
+    "borderStyle": "black",
+    "backgroundColor":"#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "名片"
+      },
+      {
+        "iconPath": "images/index/markt.png",
+        "selectedIconPath": "images/index/marktactive.png",
+        "pagePath": "pages/mall/mallindex",
+        "text": "商城"
+      },
+      {
+        "iconPath": "images/index/company.png",
+        "selectedIconPath":"images/index/companyactive.png",
+        "pagePath": "pages/company/company",
+        "text": "公司介绍"
+      },
+      {
+        "iconPath": "images/index/studentshare.png",
+        "selectedIconPath": "images/index/studentshareactive.png",
+        "pagePath": "pages/student/student",
+        "text": "学员分享"
+      }
+    ]
+  }
+}

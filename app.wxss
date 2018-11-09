@@ -1,0 +1,64 @@
+/**app.wxss**/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+navigator{
+  width: 100%;
+  height: 100%;
+}
+
+.iconfont{
+    font-size: 40rpx;
+    vertical-align: bottom;
+    display:inline-block;
+}
+
+page{
+  min-height: 100%;
+}
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+page{
+    font-size: 32rpx;
+}
+
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+.clearfix{
+    zoom:1;
+}
+.clearfix:after {
+    content:""; 
+    display: block; 
+    clear:both; 
+}
+.hide{
+    display:none !important;
+}
+
+image{
+  width: 100%;
+  height: 100%;
+}
+
+.one-curt-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+
+}

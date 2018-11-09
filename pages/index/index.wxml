@@ -1,0 +1,51 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="topcontainer">
+      <view class="topcontainer-content">
+        <view class="topcontainer-content-left fl"><image src="../../images/index/peoplehead.png"></image></view>
+        <view class="topcontainer-content-right fl">
+            <view class="title"><text>左文伟</text><text>首席服务官</text></view>
+            <view class="item"><image src="../../images/index/telphone.png"></image><text>186821557078</text></view>
+            <view class="item"><image src="../../images/index/WX.png"></image><text>linan1634555887</text></view>
+            <view class="item"><image src="../../images/index/address.png"></image><text>深圳市南山区软件产业基地6栋腾讯众创空间4F</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="slidetoggle"><text>收起一下名片信息</text></view>
+    <view class="slide-contaire">
+        <view class="slide-contaireitem"><text>电话</text><text>186821557078</text><text>拨打</text></view>
+        <view class="slide-contaireitem"><text>微信</text><text>huili526526</text><text>复制</text></view>
+        <view class="slide-contaireitem"><text>公司</text><text>福道文化传播</text><text>复制</text></view>
+        <view class="slide-contaireitem"><text>地址</text><text>广东省深圳市龙华区金禾田实业有限公司 K301</text><text>复制</text></view> 
+    </view>
+    <view class="sharemingpian"><text>分享名片</text><text>存入手机通讯录</text></view>
+    <view class="about">
+      <view class="about-title">
+        <text>个人简介</text>
+        <text>ABOUT</text>
+      </view>
+      <view class="about-content">
+        <text>厦门汇影片场系影宝易APP厦门指定城市运营商。\n本着促进交流扩大合作\n让影视资源高效流通的理念\n致力于打造厦门最大最全的资源平台！\n促进影视行业基础建设高速发展！</text>
+        <text>1.互联网高频解决器材高价，让器材租赁价格低于市场30%！有多便宜？下载影宝易APP，亲自感受一下？</text>
+        <text>2.企业化管理和标准化训练考核，解决助理人员素质问题！服务好不好？去影宝易APP下单人员，绝对爽！</text>
+        <text>3.第三方支付，解决信任问题！异地拍摄？要靠谱？通通没问题！</text>
+      </view>
+    </view>
+    <view class="voice">
+      <view class="voice-title"><text>语音介绍</text><text>VOICE</text></view>
+      <view class="voice-content">
+          <view class="voice-item">
+            <view class="voice-itemleft"><image src="../../images/index/play.png"></image></view>
+            <view class="voice-itemright">
+              <text class="voice-itemtitle">我的语音介绍</text>
+              <view class="progess-box">
+                <!-- <audio src="http://p8i1x61e3.bkt.clouddn.com/9b9c66c6ac728e6891f7a477245e7e2c"></audio> -->
+                <view><text></text></view>
+                <view></view>
+              </view>
+              <view class="voice-currenttime"><text>00:00</text><text>00:40</text></view>
+            </view>
+          </view>
+      </view>
+    </view>
+</view>
