@@ -50,12 +50,6 @@ page{
 .hide{
     display:none !important;
 }
-
-image{
-  width: 100%;
-  height: 100%;
-}
-
 .one-curt-text{
   overflow:hidden;
   text-overflow:ellipsis;

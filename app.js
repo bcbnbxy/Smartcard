@@ -1,9 +1,14 @@
 //app.js
 App({
+  globalData: {
+    //baseApi: "https://api.fudaojt.com",// 正式接口
+    baseApi: "https://kf.fudaojt.com",// 测试接口
+    version: "1.0",
+    product: "fudao-mini-program"
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
-    console.log(1111);
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
@@ -16,7 +21,6 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        console.log(JSON.stringify(res));
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({

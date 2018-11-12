@@ -14,6 +14,12 @@ page{
 .topcontainer-content-left{
   width:326rpx;
   height:100%;
+ -webkit-clip-path:polygon(0rpx 0px,270rpx 0,100% 100%,0 100%);
+  overflow: hidden;
+}
+.topcontainer-content-left image{
+  width:100%;
+  height:100%;
 }
 .topcontainer-content-right{
   width:344rpx;
@@ -54,6 +60,9 @@ page{
 }
 .slidetoggle{
   width:100%;
+}
+.slidetoggle view{
+  width:100%;
   height:92rpx;
   text-align: center;
   line-height:92rpx;
@@ -61,8 +70,24 @@ page{
   font-size:24rpx;
   color:#9D9D9D;
 }
+.slidetoggle image{
+  display: inline-block;
+  width:17rpx;
+  height:9rpx;
+  margin-left:10rpx;
+  position: relative;
+  top:-5rpx;
+}
 .slide-contaire{
+  height:auto;
   padding:20rpx 40rpx;
+  transition: all 0.3s;
+}
+.slide-contairehide{
+  padding:0 40rpx;
+  height:0;
+  overflow: hidden;
+  transition: all 0.3s;
 }
 .slide-contaireitem{
   display: flex;
@@ -270,4 +295,108 @@ page{
   color:#BFBFBF;
   display: flex;
   justify-content: space-between;
+}
+
+.mask{
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,.7);
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: 1000;
+  overflow: hidden;
+}
+.masktel{
+  width:100%;
+  background: #E7E7E7;
+  position: absolute;
+  bottom:0;
+  left:0;
+  z-index: 1001
+}
+.masktel text{
+  display: block;
+  height:116rpx;
+  width:100%;
+  text-align: center;
+  font-size:38rpx;
+  color:#000;
+  background: #fff;
+  line-height: 116rpx;
+}
+.masktel text:last-child{
+  margin-top:16rpx;
+}
+.masktel text:first-child{
+  color:#818181;
+  font-size:30rpx;
+  margin-bottom:1px;
+}
+.bigheadimg{
+  width:100%;
+  height:100%;
+  position: relative;
+}
+.bigheadimg image{
+  width:100%;
+  height:100%;
+  position: absolute; 
+  bottom:0;
+  right:0;
+  margin:0;
+}
+.maskshare{
+  width:100%;
+  background: #E7E7E7;
+  position: absolute;
+  bottom:0;
+  left:0;
+  z-index: 1001
+}
+.maskshare>text{
+  display: block;
+  height:80rpx;
+  width:100%;
+  text-align: center;
+  font-size:24rpx;
+  color:#000;
+  background: #fff;
+  line-height: 80rpx;
+}
+.maskshare-item{  
+  width:100%;
+  padding:0 190rpx;
+  padding-top:8rpx;
+  box-sizing: border-box;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom:18rpx;
+}
+.maskshare-item>view button{
+  display: inline;
+  padding:0; 
+  margin:0;
+}
+.maskshare-item>view button::after{
+  border:0;
+}
+.maskshare-item>view view{
+  font-size:24rpx;
+  color:#393939;
+  line-height:76rpx;
+}
+.maskshare-item>view image{
+    width:90rpx;
+    height:90rpx;
+    display: block;
+}
+.maskshare>button{
+  width:100%;
+  height:88rpx;
+  font-size:28rpx;
+  color:#393939;
+  background: #fff;
+  line-height: 88rpx;
 }

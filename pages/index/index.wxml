@@ -2,23 +2,26 @@
 <view class="container">
     <view class="topcontainer">
       <view class="topcontainer-content">
-        <view class="topcontainer-content-left fl"><image src="../../images/index/peoplehead.png"></image></view>
+        <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png"><image src="../../images/index/peoplehead.png"></image></view>
         <view class="topcontainer-content-right fl">
             <view class="title"><text>左文伟</text><text>首席服务官</text></view>
-            <view class="item"><image src="../../images/index/telphone.png"></image><text>186821557078</text></view>
+            <view class="item" bindtap='maskshow' data-item="1"><image src="../../images/index/telphone.png" data-phonenum="15679138775"></image><text>186821557078</text></view>
             <view class="item"><image src="../../images/index/WX.png"></image><text>linan1634555887</text></view>
             <view class="item"><image src="../../images/index/address.png"></image><text>深圳市南山区软件产业基地6栋腾讯众创空间4F</text></view>
         </view>
       </view>
     </view>
-    <view class="slidetoggle"><text>收起一下名片信息</text></view>
-    <view class="slide-contaire">
-        <view class="slide-contaireitem"><text>电话</text><text>186821557078</text><text>拨打</text></view>
-        <view class="slide-contaireitem"><text>微信</text><text>huili526526</text><text>复制</text></view>
-        <view class="slide-contaireitem"><text>公司</text><text>福道文化传播</text><text>复制</text></view>
-        <view class="slide-contaireitem"><text>地址</text><text>广东省深圳市龙华区金禾田实业有限公司 K301</text><text>复制</text></view> 
+    <view class="slidetoggle" bindtap='toggle'>
+        <view wx:if="{{toggleslide}}" >收起一下名片信息<image src="../../images/index/up.png"></image></view>
+        <view wx:else>展开全部名片信息<image src="../../images/index/down.png"></image></view>
     </view>
-    <view class="sharemingpian"><text>分享名片</text><text>存入手机通讯录</text></view>
+    <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
+        <view class="slide-contaireitem"><text>电话</text><text>186821557078</text><text bindtap='maskshow' data-item="1" data-phonenum="15679138775">拨打</text></view>
+        <view class="slide-contaireitem"><text>微信</text><text selectable='true' bindlongtap='copy'>huili526526</text><text data-copytext="huili526526" bindtap="copy">复制</text></view>
+        <view class="slide-contaireitem"><text>公司</text><text selectable='true' bindlongtap='copy'>福道文化传播</text><text data-copytext="福道文化传播" bindtap="copy">复制</text></view>
+        <view class="slide-contaireitem"><text>地址</text><text selectable='true' bindlongtap='copy'>广东省深圳市龙华区金禾田实业有限公司 K301</text><text data-copytext="广东省深圳市龙华区金禾田实业有限公司 K301" bindtap="copy">复制</text></view> 
+    </view>
+    <view class="sharemingpian"><text bindtap='maskshow' data-item="2">分享名片</text><text bindtap="saveaddresslist">存入手机通讯录</text></view>
     <view class="about">
       <view class="about-title">
         <text>个人简介</text>
@@ -48,4 +51,26 @@
           </view>
       </view>
     </view>
+</view>
+<view class="mask"  catchtouchmove='true' wx:if="{{maskshow}}" bindtap='hidemask'>
+    <view class="masktel" catchtap="stopmask" wx:if="{{maskitem==1}}">
+      <text>13782056503</text>
+      <text catchtap="callphone">呼叫</text>
+      <text catchtap='hidemask'>取消</text>
+    </view>
+    <view class="maskshare" catchtap="stopmask" wx:if="{{maskitem==2}}">
+        <text>分享到</text>
+        <view class="maskshare-item">
+          <view>
+            <button open-type='share'><image src="../../images/index/wxshare.png"></image></button>
+            <view>微信好友</view>
+          </view>
+          <view>
+            <button open-type='share'><image src="../../images/index/wxfriend.png"></image></button>
+            <view>生成名片</view>
+          </view>
+        </view>
+        <button>取消</button>
+    </view>
+    <view class="bigheadimg"><image src="{{headimg}}" mode='aspectFit'></image></view>
 </view>
