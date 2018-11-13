@@ -1,5 +1,5 @@
 const app = getApp()
-const baseUrl = 'http://test.fudaojt.com:8080';
+const baseUrl = 'http://192.169.0.181:8080';
 const http = ({ url = '', param = {}, ...other } = {}) => {
   wx.showLoading({
     title: '加载中...'

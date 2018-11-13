@@ -1,13 +1,18 @@
 <!--index.wxml-->
 <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 授权登录 </button>
+    <block wx:else>
+      <view class="container">
     <view class="topcontainer">
       <view class="topcontainer-content">
-        <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png"><image src="../../images/index/peoplehead.png"></image></view>
+        <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png"><image src="{{fudoUser.wechatImg?fudoUser.wechatImg:'../../images/index/peoplehead.png'}}"></image></view>
         <view class="topcontainer-content-right fl">
-            <view class="title"><text>左文伟</text><text>首席服务官</text></view>
-            <view class="item" bindtap='maskshow' data-item="1"><image src="../../images/index/telphone.png" data-phonenum="15679138775"></image><text>186821557078</text></view>
-            <view class="item"><image src="../../images/index/WX.png"></image><text>linan1634555887</text></view>
-            <view class="item"><image src="../../images/index/address.png"></image><text>深圳市南山区软件产业基地6栋腾讯众创空间4F</text></view>
+
+            <view class="title"><text>{{fudoUser.name?fudoUser.name:fudoUser.realName}}</text><text>首席服务官</text></view>
+            <view class="item" bindtap='maskshow' data-item="1"><image src="../../images/index/telphone.png" data-phonenum="{{fudoUser.userMobile?fudoUser.userMobile:0}}"></image><text>{{fudoUser.userMobile?fudoUser.userMobile:"无"}}</text></view>
+            <view class="item"><image src="../../images/index/WX.png"></image><text>{{fudoUser.wechatName?fudoUser.wechatName:"无"}}</text></view>
+            <view class="item"><image src="../../images/index/address.png"></image><text>{{fudoUser.province+fudoUser.city}}</text></view>
         </view>
       </view>
     </view>
@@ -16,8 +21,8 @@
         <view wx:else>展开全部名片信息<image src="../../images/index/down.png"></image></view>
     </view>
     <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
-        <view class="slide-contaireitem"><text>电话</text><text>186821557078</text><text bindtap='maskshow' data-item="1" data-phonenum="15679138775">拨打</text></view>
-        <view class="slide-contaireitem"><text>微信</text><text selectable='true' bindlongtap='copy'>huili526526</text><text data-copytext="huili526526" bindtap="copy">复制</text></view>
+        <view class="slide-contaireitem"><text>电话</text><text>{{fudoUser.userMobile?fudoUser.userMobile:0}}</text><text bindtap='maskshow' data-item="1" data-phonenum="{{fudoUser.userMobile?fudoUser.userMobile:0}}">拨打</text></view>
+        <view class="slide-contaireitem"><text>微信</text><text selectable='true' bindlongtap='copy'>{{fudoUser.wechatName?fudoUser.wechatName:"无"}}</text><text data-copytext="{{fudoUser.wechatName?fudoUser.wechatName:'无'}}" bindtap="copy">复制</text></view>
         <view class="slide-contaireitem"><text>公司</text><text selectable='true' bindlongtap='copy'>福道文化传播</text><text data-copytext="福道文化传播" bindtap="copy">复制</text></view>
         <view class="slide-contaireitem"><text>地址</text><text selectable='true' bindlongtap='copy'>广东省深圳市龙华区金禾田实业有限公司 K301</text><text data-copytext="广东省深圳市龙华区金禾田实业有限公司 K301" bindtap="copy">复制</text></view> 
     </view>
@@ -66,7 +71,7 @@
             <view>微信好友</view>
           </view>
           <view>
-            <button open-type='share'><image src="../../images/index/wxfriend.png"></image></button>
+             <navigator url="/pages/card/mycard?title=redirect"  open-type="redirect" hover-class="other-navigator-hover"><image src="../../images/index/wxfriend.png"></image></navigator>
             <view>生成名片</view>
           </view>
         </view>
@@ -75,3 +80,6 @@
     <view class="bigheadimg"><image src="{{headimg}}" mode='aspectFit'></image></view>
 </view>
 <zixun/>
+    </block>         
+  </view>
+</view>
