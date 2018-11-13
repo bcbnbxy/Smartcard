@@ -1,0 +1,11 @@
+.zixun{
+  width:132rpx;
+  height:132rpx;
+  position: fixed;
+  top:700rpx;
+  right:20rpx;
+}
+.zixun image{
+  width:100%;
+  height:100%;
+}

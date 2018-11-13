@@ -89,7 +89,7 @@ Page({
   },
   getUserInfo(){
     cmsBroadCast().then((res) => {
-      console.log(JSON.stringify(res));
+      // console.log(JSON.stringify(res));
     }) 
   }
 })

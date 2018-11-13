@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+  "zixun": "../../components/zixun/zixun" 
+  }
+}

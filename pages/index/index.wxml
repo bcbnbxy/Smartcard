@@ -74,3 +74,4 @@
     </view>
     <view class="bigheadimg"><image src="{{headimg}}" mode='aspectFit'></image></view>
 </view>
+<zixun/>

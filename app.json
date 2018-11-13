@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/mall/mallindex",
     "pages/company/company",
-    "pages/student/student"
+    "pages/student/student",
+    "pages/index/chart/chart"
   ],
   "window":{
     "backgroundTextStyle":"light",

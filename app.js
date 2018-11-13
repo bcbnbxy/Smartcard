@@ -1,8 +1,6 @@
 //app.js
 App({
   globalData: {
-    //baseApi: "https://api.fudaojt.com",// 正式接口
-    baseApi: "https://kf.fudaojt.com",// 测试接口
     version: "1.0",
     product: "fudao-mini-program"
   },

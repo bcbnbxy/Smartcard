@@ -2,20 +2,19 @@ const app = getApp()
 const baseUrl = 'http://test.fudaojt.com:8080';
 const http = ({ url = '', param = {}, ...other } = {}) => {
   wx.showLoading({
-    title: '请求中，请耐心等待..'
+    title: '加载中...'
   });
   let timeStart = Date.now();
   return new Promise((resolve, reject) => {
     wx.request({
       url: getUrl(url),
       data: param,
-      header: {
-        'content-type': 'application/json' // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
-      },
+      // header: {
+      //   'content-type': 'application/json' // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
+      // },
       ...other,
       complete: (res) => {
         wx.hideLoading();
-        console.log(`耗时${Date.now() - timeStart}`);
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
         } else {
@@ -36,7 +35,7 @@ const getUrl = (url) => {
 const _get = (url, param = {}) => {
   return http({
     url,
-    param
+    param             
   }).then(res => res.data)
     .catch(err => console.log(err))
 }
