@@ -3,7 +3,7 @@
 const app = getApp()
 var urls = require('../../common/urls.js')
 var util = require('../../utils/util.js')
-import { cmsBroadCast } from '../../utils/api.js'
+import { cmsBroadCast, getUserbyUnionid, getAccessToken, getWxacodeunlimit } from '../../utils/api.js'
 Page({
   data: {
     recommentUserId: "",
@@ -27,7 +27,7 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-   
+   debugger
 
     var recommentUserId = decodeURIComponent(options.scene)
     var that = this;
@@ -131,8 +131,7 @@ Page({
     })
   },
   getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail.userInfo;
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
@@ -168,28 +167,15 @@ function login(that) {
                   if (app.userInfoReadyCallback) {
                     app.userInfoReadyCallback(res)
                   }
+                  debugger
                   //根据unionid查找登录用户信息
-                  wx.request({
-                    url: urls.getUserbyUnionid,
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded'
-                    },
-                    data: {
-                      'code': that.code,
-                      'idrecommendUserid': that.recommentUserId,
-                      'userInfo': JSON.stringify(res.userInfo)
-                    },
-                    method: 'POST',
-                    success: function (res) {
-                      that.setData({
-                        fudoUser: res.data.data,
+                  getUserbyUnionid({ code: that.code, recommendUserid: that.data.recommentUserId, userInfo: JSON.stringify(res.userInfo) }).then( (res) =>{
+                    debugger
+                    that.setData({
+                        fudoUser: res,
                         hasfudoUser: true,
                       })
-                    },
-                    fail: function () {
-                    },
-                  })
-
+                  }).catch(err => console.log(err));
                 }
               })
             }
@@ -209,16 +195,12 @@ function login(that) {
  * 生成小程序二维码
  */
 function creaMiniQRCode(that, urls,scene) {
-  wx.request({
-    url: urls.getAccessToken,
-    data: {},
-    method: "POST",
-    success(res) {
-      debugger;
-      var access_token = res.data.data;
-      debugger
-      console.log(access_token)
-      var url = util.splitParameter(urls.getWxacodeunlimit, "access_token", access_token);
+
+  //先获取access_token
+  getAccessToken().then((res) => {
+    debugger
+    var access_token = res;
+    var url = util.splitParameter(urls.getWxacodeunlimit, "access_token", access_token);
       // 生成页面的二维码
       wx.request({
         url: url,
@@ -240,11 +222,8 @@ function creaMiniQRCode(that, urls,scene) {
           console.log(e)
         }
       })
+   
+  }).catch(err => console.log(err));
 
 
-    },
-    fail(e) {
-      console.log(e)
-    }
-  })
 }

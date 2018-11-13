@@ -9,9 +9,6 @@ const http = ({ url = '', param = {}, ...other } = {}) => {
     wx.request({
       url: getUrl(url),
       data: param,
-      // header: {
-      //   'content-type': 'application/json' // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
-      // },
       ...other,
       complete: (res) => {
         wx.hideLoading();
@@ -44,8 +41,12 @@ const _post = (url, param = {}) => {
   return http({
     url,
     param,
-    method: 'post'
-  })
+    method: 'post',
+    header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
+      },
+  }).then(res => res.data)
+    .catch(err => console.log(err))
 }
 
 const _put = (url, param = {}) => {
@@ -64,8 +65,17 @@ const _delete = (url, param = {}) => {
   })
 }
 const sendApi={
-  cmsBroadCast: '/cms/broadcast'
+  cmsBroadCast: '/cms/broadcast',
+  getUserbyUnionid: '/passport/wxuser/login/cardminiprogram', //根据unionid根据用户信息
+  getAccessToken: '/wechatCardmini/getAccessToken', //获取智能名片小程序AccessToken
 } 
+export const getUserbyUnionid = query => {
+  return _post(sendApi.getUserbyUnionid, query)
+};
+export const getAccessToken = query => {
+  return _post(sendApi.getAccessToken, query)
+};
+
 
 export const cmsBroadCast = query => {
   return _get(sendApi.cmsBroadCast, query)
