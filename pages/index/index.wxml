@@ -129,8 +129,8 @@
           <image src="{{headimg}}" mode='aspectFit'></image>
         </view>
       </view>
+      <zixun/>
     </block>
-
 
   </view>
 </view>
