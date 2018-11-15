@@ -27,8 +27,6 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-   debugger
-
     var recommentUserId = decodeURIComponent(options.scene)
     var that = this;
     if (app.globalData.userInfo) {
@@ -63,7 +61,7 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-    creaMiniQRCode(this,urls,recommentUserId);
+    // creaMiniQRCode(this,urls,recommentUserId);
     login(that);
   },
   toggle() {
@@ -167,10 +165,10 @@ function login(that) {
                   if (app.userInfoReadyCallback) {
                     app.userInfoReadyCallback(res)
                   }
-                  debugger
+                  
                   //根据unionid查找登录用户信息
                   getUserbyUnionid({ code: that.code, recommendUserid: that.data.recommentUserId, userInfo: JSON.stringify(res.userInfo) }).then( (res) =>{
-                    debugger
+                    
                     that.setData({
                         fudoUser: res,
                         hasfudoUser: true,
@@ -198,7 +196,6 @@ function creaMiniQRCode(that, urls,scene) {
 
   //先获取access_token
   getAccessToken().then((res) => {
-    debugger
     var access_token = res;
     var url = util.splitParameter(urls.getWxacodeunlimit, "access_token", access_token);
       // 生成页面的二维码

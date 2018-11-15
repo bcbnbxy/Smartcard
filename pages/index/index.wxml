@@ -4,82 +4,133 @@
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 授权登录 </button>
     <block wx:else>
       <view class="container">
-    <view class="topcontainer">
-      <view class="topcontainer-content">
-        <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png"><image src="{{fudoUser.wechatImg?fudoUser.wechatImg:'../../images/index/peoplehead.png'}}"></image></view>
-        <view class="topcontainer-content-right fl">
+        <view class="topcontainer">
+          <view class="topcontainer-content">
+            <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png">
+              <image src="{{fudoUser.tuser.wechatImg?fudoUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}"></image>
+            </view>
+            <view class="topcontainer-content-right fl">
 
-            <view class="title"><text>{{fudoUser.name?fudoUser.name:fudoUser.realName}}</text><text>首席服务官</text></view>
-            <view class="item" bindtap='maskshow' data-item="1"><image src="../../images/index/telphone.png" data-phonenum="{{fudoUser.userMobile?fudoUser.userMobile:0}}"></image><text>{{fudoUser.userMobile?fudoUser.userMobile:"无"}}</text></view>
-            <view class="item"><image src="../../images/index/WX.png"></image><text>{{fudoUser.wechatName?fudoUser.wechatName:"无"}}</text></view>
-            <view class="item"><image src="../../images/index/address.png"></image><text>{{fudoUser.province+fudoUser.city}}</text></view>
-        </view>
-      </view>
-    </view>
-    <view class="slidetoggle" bindtap='toggle'>
-        <view wx:if="{{toggleslide}}" >收起一下名片信息<image src="../../images/index/up.png"></image></view>
-        <view wx:else>展开全部名片信息<image src="../../images/index/down.png"></image></view>
-    </view>
-    <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
-        <view class="slide-contaireitem"><text>电话</text><text>{{fudoUser.userMobile?fudoUser.userMobile:0}}</text><text bindtap='maskshow' data-item="1" data-phonenum="{{fudoUser.userMobile?fudoUser.userMobile:0}}">拨打</text></view>
-        <view class="slide-contaireitem"><text>微信</text><text selectable='true' bindlongtap='copy'>{{fudoUser.wechatName?fudoUser.wechatName:"无"}}</text><text data-copytext="{{fudoUser.wechatName?fudoUser.wechatName:'无'}}" bindtap="copy">复制</text></view>
-        <view class="slide-contaireitem"><text>公司</text><text selectable='true' bindlongtap='copy'>福道文化传播</text><text data-copytext="福道文化传播" bindtap="copy">复制</text></view>
-        <view class="slide-contaireitem"><text>地址</text><text selectable='true' bindlongtap='copy'>广东省深圳市龙华区金禾田实业有限公司 K301</text><text data-copytext="广东省深圳市龙华区金禾田实业有限公司 K301" bindtap="copy">复制</text></view> 
-    </view>
-    <view class="sharemingpian"><text bindtap='maskshow' data-item="2">分享名片</text><text bindtap="saveaddresslist">存入手机通讯录</text></view>
-    <view class="about">
-      <view class="about-title">
-        <text>个人简介</text>
-        <text>ABOUT</text>
-      </view>
-      <view class="about-content">
-        <text>厦门汇影片场系影宝易APP厦门指定城市运营商。\n本着促进交流扩大合作\n让影视资源高效流通的理念\n致力于打造厦门最大最全的资源平台！\n促进影视行业基础建设高速发展！</text>
-        <text>1.互联网高频解决器材高价，让器材租赁价格低于市场30%！有多便宜？下载影宝易APP，亲自感受一下？</text>
-        <text>2.企业化管理和标准化训练考核，解决助理人员素质问题！服务好不好？去影宝易APP下单人员，绝对爽！</text>
-        <text>3.第三方支付，解决信任问题！异地拍摄？要靠谱？通通没问题！</text>
-      </view>
-    </view>
-    <view class="voice">
-      <view class="voice-title"><text>语音介绍</text><text>VOICE</text></view>
-      <view class="voice-content">
-          <view class="voice-item">
-            <view class="voice-itemleft"><image src="../../images/index/play.png"></image></view>
-            <view class="voice-itemright">
-              <text class="voice-itemtitle">我的语音介绍</text>
-              <view class="progess-box">
-                <!-- <audio src="http://p8i1x61e3.bkt.clouddn.com/9b9c66c6ac728e6891f7a477245e7e2c"></audio> -->
-                <view><text></text></view>
-                <view></view>
+              <view class="title">
+                <text>{{fudoUser.tuser.name?fudoUser.tuser.name:fudoUser.tuser.realName}}</text>
+                <text>{{fudoUser.cardminiuser.position?fudoUser.cardminiuser.position:"无"}}</text>
               </view>
-              <view class="voice-currenttime"><text>00:00</text><text>00:40</text></view>
+              <view class="item" bindtap='maskshow' data-item="1">
+                <image src="../../images/index/telphone.png" data-phonenum="{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:0}}"></image>
+                <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:"无"}}</text>
+              </view>
+              <view class="item">
+                <image src="../../images/index/WX.png"></image>
+                <text>{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:"无"}}</text>
+              </view>
+              <view class="item">
+                <image src="../../images/index/address.png"></image>
+                <text>{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:"无"}}</text>
+              </view>
             </view>
           </view>
-      </view>
-    </view>
-</view>
-<view class="mask"  catchtouchmove='true' wx:if="{{maskshow}}" bindtap='hidemask'>
-    <view class="masktel" catchtap="stopmask" wx:if="{{maskitem==1}}">
-      <text>13782056503</text>
-      <text catchtap="callphone">呼叫</text>
-      <text catchtap='hidemask'>取消</text>
-    </view>
-    <view class="maskshare" catchtap="stopmask" wx:if="{{maskitem==2}}">
-        <text>分享到</text>
-        <view class="maskshare-item">
-          <view>
-            <button open-type='share'><image src="../../images/index/wxshare.png"></image></button>
-            <view>微信好友</view>
+        </view>
+        <view class="slidetoggle" bindtap='toggle'>
+          <view wx:if="{{toggleslide}}">收起一下名片信息
+            <image src="../../images/index/up.png"></image>
           </view>
-          <view>
-             <navigator url="/pages/card/mycard?title=redirect"  open-type="redirect" hover-class="other-navigator-hover"><image src="../../images/index/wxfriend.png"></image></navigator>
-            <view>生成名片</view>
+          <view wx:else>展开全部名片信息
+            <image src="../../images/index/down.png"></image>
           </view>
         </view>
-        <button>取消</button>
-    </view>
-    <view class="bigheadimg"><image src="{{headimg}}" mode='aspectFit'></image></view>
-</view>
-<zixun/>
-    </block>         
+        <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
+          <view class="slide-contaireitem">
+            <text>电话</text>
+            <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:0}}</text>
+            <text bindtap='maskshow' data-item="1" data-phonenum="{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:'无'}}">拨打</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>微信</text>
+            <text selectable='true' bindlongtap='copy'>{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:"无"}}</text>
+            <text data-copytext="{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:'无'}}" bindtap="copy">复制</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>公司</text>
+            <text selectable='true' bindlongtap='copy'>{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:'无'}}</text>
+            <text data-copytext="{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:'无'}}" bindtap="copy">复制</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>地址</text>
+            <text selectable='true' bindlongtap='copy'>{{fudoUser.cardminiuser.address?fudoUser.cardminiuser.address:'无'}}</text>
+            <text data-copytext="{{fudoUser.cardminiuser.address?fudoUser.cardminiuser.address:'无'}}" bindtap="copy">复制</text>
+          </view>
+        </view>
+        <view class="sharemingpian">
+          <text bindtap='maskshow' data-item="2">分享名片</text>
+          <text bindtap="saveaddresslist">存入手机通讯录</text>
+        </view>
+        <view class="about">
+          <view class="about-title">
+            <text>个人简介</text>
+            <text>ABOUT</text>
+          </view>
+          <view class="about-content">
+            <text>{{fudoUser.tuser.comment?fudoUser.tuser.comment:"无"}}</text>
+          </view>
+        </view>
+        <view class="voice">
+          <view class="voice-title">
+            <text>语音介绍</text>
+            <text>VOICE</text>
+          </view>
+          <view class="voice-content">
+            <view class="voice-item">
+              <view class="voice-itemleft">
+                <image src="../../images/index/play.png"></image>
+              </view>
+              <view class="voice-itemright">
+                <text class="voice-itemtitle">我的语音介绍</text>
+                <view class="progess-box">
+                  <audio src="{{fudoUser.cardminiuser.voice}}"></audio>
+                  <view>
+                    <text></text>
+                  </view>
+                  <view></view>
+                </view>
+                <view class="voice-currenttime">
+                  <text>00:00</text>
+                  <text>00:40</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="mask" catchtouchmove='true' wx:if="{{maskshow}}" bindtap='hidemask'>
+        <view class="masktel" catchtap="stopmask" wx:if="{{maskitem==1}}">
+          <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:'无'}}</text>
+          <text catchtap="callphone">呼叫</text>
+          <text catchtap='hidemask'>取消</text>
+        </view>
+        <view class="maskshare" catchtap="stopmask" wx:if="{{maskitem==2}}">
+          <text>分享到</text>
+          <view class="maskshare-item">
+            <view>
+              <button open-type='share'>
+                <image src="../../images/index/wxshare.png"></image>
+              </button>
+              <view>微信好友</view>
+            </view>
+            <view>
+              <navigator url="/pages/card/mycard?title=redirect" open-type="redirect" hover-class="other-navigator-hover">
+                <image src="../../images/index/wxfriend.png"></image>
+              </navigator>
+              <view>生成名片</view>
+            </view>
+          </view>
+          <button>取消</button>
+        </view>
+        <view class="bigheadimg">
+          <image src="{{headimg}}" mode='aspectFit'></image>
+        </view>
+      </view>
+    </block>
+
+
   </view>
 </view>
