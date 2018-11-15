@@ -222,6 +222,4 @@ function creaMiniQRCode(that, urls, scene) {
     })
 
   }).catch(err => console.log(err));
-
-
 }
