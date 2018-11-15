@@ -3,11 +3,10 @@
 const app = getApp()
 var urls = require('../../common/urls.js')
 var util = require('../../utils/util.js')
-import {
-  getUserbyUnionid,
-  getAccessToken,
-  getWxacodeunlimit
-} from '../../utils/api.js'
+// var cmsBroadCast = require('../../utils/api.js')
+// var getUserbyUnionid = require('../../utils/api.js')
+// var getWxacodeunlimit = require('../../utils/api.js')
+import { cmsBroadCast, getUserbyUnionid, getAccessToken, getWxacodeunlimit } from '../../utils/api.js'
 Page({
   data: {
     recommentUserId: "",
