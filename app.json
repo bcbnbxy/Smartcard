@@ -4,7 +4,8 @@
     "pages/mall/mallindex",
     "pages/company/company",
     "pages/student/student",
-    "pages/index/chart/chart"
+    "pages/index/chart/chart",
+    "pages/card/mycard"
   ],
   "window": {
     "backgroundTextStyle": "light",

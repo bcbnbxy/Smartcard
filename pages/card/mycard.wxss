@@ -1,0 +1,96 @@
+/* pages/card/mycard.wxss */
+page{
+  background:rgba(247,247,247,1);
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+.userinfo{
+  width:100%;
+  padding:36rpx 40rpx;
+  box-sizing: border-box;
+  padding-bottom:0;
+}
+.userinfo-contaire{
+  width:100%;
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+.userinfo-contaire-left{
+  width:326rpx;
+  height:395rpx;
+ -webkit-clip-path:polygon(0rpx 0px,270rpx 0,100% 100%,0 100%);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.userinfo-contaire-left image{
+  width:100%;
+  height:100%;
+}
+.userinfo-contaire-right{
+  flex: 1;
+  padding-left: 19rpx;
+  padding-right:32rpx;
+}
+.userinfo-contaire-righttitle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height:1;
+  padding-top:47rpx;
+  margin-bottom:43rpx;
+}
+.userinfo-contaire-righttitle text:first-child{
+  font-size:32rpx;
+  color:#353535;
+}
+.userinfo-contaire-righttitle text:last-child{
+  font-size:22rpx;
+  color:#6C7791;
+  margin-top:17rpx;
+}
+.userinfo-contaire-rightitem {
+  line-height: 32rpx;
+  font-size:22rpx;
+  color:#353535;
+  margin-bottom:18rpx;
+  display: flex;
+}
+.userinfo-contaire-rightitem image{
+  width:32rpx;
+  height:32rpx;
+  flex: 0 0 32rpx;
+  margin-right:28rpx;
+}
+.seecode{
+  text-align: center;
+  line-height: 130rpx;
+  font-size:24rpx;
+  color:#2A2A2A;
+  box-shadow:1px 8px 24px 0px rgba(157,157,157,0.27);
+}
+.qcode{
+  flex:1;
+  background: #fff;
+  padding-top:45rpx;
+}
+.qcode button{
+  width:673rpx;
+  height:104rpx;
+  background:rgba(26,173,25,1);
+  border-radius:16rpx;
+  font-size:30rpx;
+  line-height: 104rpx;
+  text-align: center;
+  color:rgba(255,255,255,1);
+  margin-top:56rpx;
+}
+.qcodebox{
+  width:326rpx;
+  height:326rpx;
+  margin:0 auto;
+  background: #f7f7f7;
+  border-radius:50%; 
+}

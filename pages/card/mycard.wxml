@@ -1,0 +1,32 @@
+<view class="userinfo">
+    <view class="userinfo-contaire">
+        <view class="userinfo-contaire-left">
+            <image src="../../images/index/peoplehead.png"></image>
+        </view>
+        <view class="userinfo-contaire-right">
+            <view class="userinfo-contaire-righttitle">
+                <text>左文伟</text>
+                <text>首席服务官</text>
+            </view>
+            <view class="userinfo-contaire-rightitem">
+                <image src="../../images/index/telphone.png"></image>
+                <text>186821557078</text>
+            </view>
+            <view class="userinfo-contaire-rightitem">
+                <image src="../../images/index/WX.png"></image>
+                <text>linan1634555887</text>
+            </view>
+            <view class="userinfo-contaire-rightitem">
+                <image src="../../images/index/address.png"></image>
+                <text>深圳市南山区软件产业基地6栋腾讯众创空间4F</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="seecode">长按识别二维码  收下名片</view>
+<view class="qcode">
+    <view class="qcodebox"></view>
+    <button>保存名片海报分享到朋友圈</button>
+</view>
+  
+

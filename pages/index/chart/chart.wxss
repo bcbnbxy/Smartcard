@@ -1,1 +1,226 @@
 /* pages/index/chart/chart.wxss */
+page{
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  height:100%;
+}
+.charttop{
+  width:100%;
+  flex: 1;
+  padding:40rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.charttopnav{
+  width:100%;
+  background: #fff;
+  border-radius: 5px;
+}
+.charttopnav-list{
+  width:100%;
+  box-sizing: border-box;
+  padding-top:35rpx;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom:44rpx;
+  border-bottom:1px solid #E2E5E6;
+}
+.charttopnav-item{
+  width:25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.charttopnav-item image{
+  width:70rpx;
+  height:70rpx;
+}
+.charttopnav-item text{
+  font-size:22rpx;
+  color:#555970;
+  text-align: center;
+  margin-top:20rpx;
+}
+.charttopnav-footer{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size:22rpx;
+  color:#555970;
+  text-align: center;
+
+}
+.charttopnav-footer image{
+  width:25rpx;
+  height:27rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right:16rpx;
+}
+.chartlist{
+  padding-top:23rpx;
+  flex: 1;
+}
+.chartlist-itemone{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom:23rpx;
+}
+.chartlist-itemone image{
+  width:78rpx;
+  height:78rpx;
+  flex-shrink:0;
+  margin-right:20rpx;
+}
+.chartlist-itemone view{
+  width:auto;
+  font-size:26rpx;
+  color:#131313;
+  line-height: 52rpx;
+  padding:20rpx 30rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  position: relative;
+}
+.chartlist-itemone view::after{
+  width:15rpx;
+  height:21rpx;
+  content: "";
+  display: block;
+  background: #fff;
+  position: absolute;
+  left:-14rpx;
+  top:22rpx;
+  -webkit-clip-path:polygon(0rpx 50%,100% 100%,100% 0);
+}
+
+
+.chartlist-itemtwo{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-bottom:23rpx;
+}
+.chartlist-itemtwo image{
+  width:78rpx;
+  height:78rpx;
+  flex-shrink:0;
+  margin-left:20rpx;
+}
+.chartlist-itemtwo view{
+  width:auto;
+  font-size:26rpx;
+  color:#131313;
+  line-height: 52rpx;
+  padding:20rpx 30rpx;
+  background: #a1e85a;
+  border-radius: 10rpx;
+  position: relative;
+}
+.chartlist-itemtwo view::after{
+  width:15rpx;
+  height:21rpx;
+  content: "";
+  display: block;
+  background: #a1e85a;
+  position: absolute;
+  right:-14rpx;
+  top:22rpx;
+  -webkit-clip-path:polygon(0rpx 0rpx,0 100%,100% 50%);
+}
+.chartinput{
+  width:100%;
+  height:auto;
+  background: #fff;
+}
+.chartinput-top{
+  width:100%;
+  padding:20rpx 40rpx;
+  box-sizing: border-box;
+   border-bottom:1px solid rgba(226,229,230,1);
+}
+.chartinput-toptitle{
+  display: flex;
+  height:42rpx;
+  align-items: center;
+  font-size:24rpx;
+  color:#9D9D9D;
+}
+.chartinput-toptitle text{
+  height:40rpx;
+  padding:0 18rpx;
+  line-height: 40rpx;
+  color:#555970;
+  border:1px solid rgba(214,216,225,1);
+  border-radius:21rpx;
+  margin-left:25rpx;
+}
+.chartinput-topinput{
+  padding-top:32rpx;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+}
+.chartinput-topinput input{
+  flex:1;
+  height:78rpx;
+  font-size:26rpx;
+  background:rgba(243,245,247,1);
+  border:1px solid rgba(230,230,230,1);
+  border-radius:39rpx;
+  padding:0 35rpx;
+  box-sizing: border-box;
+}
+.chartinput-topinput image{
+  width:54rpx;
+  height:54rpx;
+  margin-left:19rpx;
+}
+.chartinput-bottomshow{
+  padding-top:40rpx;
+  padding-bottom:35rpx;
+  padding-left:60rpx;
+}
+.choosepicture{
+  width:119rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size:24rpx;
+  color:#848484;
+ 
+}
+.choosepicture image{
+  width: 119rpx;
+  height:119rpx;
+}
+.choosepicture text{
+  text-align: center;
+  margin-top:20rpx;
+}
+@keyframes slidedown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+.slidedown {
+    animation: slidedown 0s linear ;
+    display: none;
+}
+.slideup {
+    animation: slideup 0s linear ;
+    display: block;
+}
+@keyframes slideup {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

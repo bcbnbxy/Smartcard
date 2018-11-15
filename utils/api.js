@@ -1,5 +1,5 @@
 const app = getApp()
-const baseUrl = 'http://192.169.0.181:8080';
+const baseUrl = 'http://192.168.0.181:8080';
 const http = ({ url = '', param = {}, ...other } = {}) => {
   wx.showLoading({
     title: '加载中...'
@@ -65,7 +65,6 @@ const _delete = (url, param = {}) => {
   })
 }
 const sendApi={
-  cmsBroadCast: '/cms/broadcast',
   getUserbyUnionid: '/passport/wxuser/login/cardminiprogram', //根据unionid根据用户信息
   getAccessToken: '/wechatCardmini/getAccessToken', //获取智能名片小程序AccessToken
 } 

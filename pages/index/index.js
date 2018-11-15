@@ -3,7 +3,11 @@
 const app = getApp()
 var urls = require('../../common/urls.js')
 var util = require('../../utils/util.js')
-import { cmsBroadCast, getUserbyUnionid, getAccessToken, getWxacodeunlimit } from '../../utils/api.js'
+import {
+  getUserbyUnionid,
+  getAccessToken,
+  getWxacodeunlimit
+} from '../../utils/api.js'
 Page({
   data: {
     recommentUserId: "",
@@ -12,24 +16,22 @@ Page({
     fudoUser: {},
     hasfudoUser: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    toggleslide:true,
-    maskshow:false,
-    maskitem:'',
-    headimg:'',
+    toggleslide: true,
+    maskshow: false,
+    maskitem: '',
+    headimg: '',
   },
   //事件处理函数
-  bindViewTap: function () {
+  bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.setNavigationBarTitle({
       title: "名片"
     });
-   debugger
-
-    var recommentUserId = decodeURIComponent(options.scene)
+    var recommentUserId = decodeURIComponent(options.scene) ==='undefined' ? 0:decodeURIComponent(options.scene);
     var that = this;
     if (app.globalData.userInfo) {
       this.setData({
@@ -63,7 +65,7 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-    creaMiniQRCode(this,urls,recommentUserId);
+    creaMiniQRCode(this, urls, recommentUserId);
     login(that);
   },
   toggle() {
@@ -71,7 +73,7 @@ Page({
       "toggleslide": !this.data.toggleslide
     })
   },
-  maskshow(e) {//弹出遮罩层
+  maskshow(e) { //弹出遮罩层
     var that = this;
     if (e.currentTarget.dataset.item == 1) {
       this.setData({
@@ -88,49 +90,49 @@ Page({
         "maskitem": e.currentTarget.dataset.item,
       })
     }
-    wx.hideTabBar({//隐藏底部导航栏
-      success: function () {
+    wx.hideTabBar({ //隐藏底部导航栏
+      success: function() {
         that.setData({
           "maskshow": true
         })
       }
     })
   },
-  hidemask() {//隐藏遮罩层
+  hidemask() { //隐藏遮罩层
     this.setData({
       "maskshow": false
     });
     wx.showTabBar({});
   },
-  stopmask() {//阻止事件冒泡
+  stopmask() { //阻止事件冒泡
 
   },
-  copy(e) {//复制文本
+  copy(e) { //复制文本
     var that = this;
     wx.setClipboardData({
       //准备复制的数据
       data: e.currentTarget.dataset.copytext,
-      success: function (res) {
+      success: function(res) {
         wx.showToast({
           title: '复制成功',
         });
       }
     })
   },
-  callphone() {//拨打电话
+  callphone() { //拨打电话
     var that = this;
     wx.makePhoneCall({
-      phoneNumber: that.data.phonenum  //电话号码
+      phoneNumber: that.data.phonenum //电话号码
     })
   },
-  saveaddresslist() {//存入手机通讯录
+  saveaddresslist() { //存入手机通讯录
     var that = this;
     wx.addPhoneContact({
       "firstName": that.data.peoplename,
       "mobilePhoneNumber": that.data.phonenum
     })
   },
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
     this.setData({
       userInfo: e.detail.userInfo,
@@ -138,7 +140,7 @@ Page({
     })
     login(this);
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: '分享我的名片',
       path: '/index/index'
@@ -167,14 +169,16 @@ function login(that) {
                   if (app.userInfoReadyCallback) {
                     app.userInfoReadyCallback(res)
                   }
-                  debugger
                   //根据unionid查找登录用户信息
-                  getUserbyUnionid({ code: that.code, recommendUserid: that.data.recommentUserId, userInfo: JSON.stringify(res.userInfo) }).then( (res) =>{
-                    debugger
+                  getUserbyUnionid({
+                    code: that.code,
+                    recommendUserid: that.data.recommentUserId,
+                    userInfo: JSON.stringify(res.userInfo)
+                  }).then((res) => {
                     that.setData({
-                        fudoUser: res,
-                        hasfudoUser: true,
-                      })
+                      fudoUser: res,
+                      hasfudoUser: true,
+                    })
                   }).catch(err => console.log(err));
                 }
               })
@@ -184,9 +188,6 @@ function login(that) {
       } else {
         console.log('登录失败！' + res.errMsg)
       }
-
-
-
     }
   })
 }
@@ -194,35 +195,36 @@ function login(that) {
 /**
  * 生成小程序二维码
  */
-function creaMiniQRCode(that, urls,scene) {
-
+function creaMiniQRCode(that, urls, scene) {
+  console.log(that);
+  console.log(urls);
+  console.log(scene);
   //先获取access_token
   getAccessToken().then((res) => {
-    debugger
     var access_token = res;
     var url = util.splitParameter(urls.getWxacodeunlimit, "access_token", access_token);
-      // 生成页面的二维码
-      wx.request({
-        url: url,
-        data: {
-          scene: scene,
-          page: "pages/index/index"
-        },
-        method: "POST",
-        responseType: 'arraybuffer',  //设置响应类型
-        success(res) {
-          console.log(res) 
-          //二维码链接
-          var miniQRCodeSrc = wx.arrayBufferToBase64(res.data);  //对数据进行转换操作
-          that.setData({
-            miniQRCodeSrc: miniQRCodeSrc
-          })
-        },
-        fail(e) {
-          console.log(e)
-        }
-      })
-   
+    // 生成页面的二维码
+    wx.request({
+      url: url,
+      data: {
+        scene: scene,
+        page: "pages/index/index"
+      },
+      method: "POST",
+      responseType: 'arraybuffer', //设置响应类型
+      success(res) {
+        //二维码链接
+        var miniQRCodeSrc = wx.arrayBufferToBase64(res.data); //对数据进行转换操作
+        console.log(miniQRCodeSrc);
+        that.setData({
+          miniQRCodeSrc: miniQRCodeSrc
+        })
+      },
+      fail(e) {
+        console.log(e)
+      }
+    })
+
   }).catch(err => console.log(err));
 
 
