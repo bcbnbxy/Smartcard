@@ -65,7 +65,7 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-    creaMiniQRCode(this, urls, recommentUserId);
+    // creaMiniQRCode(this,urls,recommentUserId);
     login(that);
   },
   toggle() {
@@ -168,13 +168,9 @@ function login(that) {
                   app.globalData.userInfo = res.userInfo
                   if (app.userInfoReadyCallback) {
                     app.userInfoReadyCallback(res)
-                  }
+                  }                  
                   //根据unionid查找登录用户信息
-                  getUserbyUnionid({
-                    code: that.code,
-                    recommendUserid: that.data.recommentUserId,
-                    userInfo: JSON.stringify(res.userInfo)
-                  }).then((res) => {
+                  getUserbyUnionid({ code: that.code, recommendUserid: that.data.recommentUserId, userInfo: JSON.stringify(res.userInfo) }).then( (res) =>{
                     that.setData({
                       fudoUser: res,
                       hasfudoUser: true,
