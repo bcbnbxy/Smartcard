@@ -1,5 +1,5 @@
 const app = getApp()
-const baseUrl = 'http://localhost:8080';
+const baseUrl = 'http://localhost:8088';
 const http = ({ url = '', param = {}, ...other } = {}) => {
   wx.showLoading({
     title: '加载中...'
@@ -66,17 +66,26 @@ const _delete = (url, param = {}) => {
 }
 const sendApi={
   cmsBroadCast: '/cms/broadcast',
-  getUserbyUnionid: '/passport/wxuser/login/cardminiprogram', //根据unionid根据用户信息
+  getUserMessage: '/passport/wxuser/login/cardminiprogram', //注册|获取访客用户信息
   getAccessToken: '/wechatCardmini/getAccessToken', //获取智能名片小程序AccessToken
+  getRecommentUserIdAndCardUserId: '/passport/wxuser/getRecommentUserIdAndCardUserId', //直接搜索智能名片小程序进入名片的用户根据用户信息确定recommentUserId和cardUserId
+  getCardOwnerInfo: '/passport/wxuser/getCardOwnerInfo', //智能名片小程序获得卡片拥有者信息
 } 
-export const getUserbyUnionid = query => {
-  return _post(sendApi.getUserbyUnionid, query)
+export const getUserMessage = query => {
+  return _post(sendApi.getUserMessage, query)
 };
 export const getAccessToken = query => {
   return _post(sendApi.getAccessToken, query)
 };
 
-
 export const cmsBroadCast = query => {
   return _get(sendApi.cmsBroadCast, query)
+};
+
+export const getRecommentUserIdAndCardUserId = query => {
+  return _post(sendApi.getRecommentUserIdAndCardUserId, query)
+};
+
+export const getCardOwnerInfo = query => {
+  return _post(sendApi.getCardOwnerInfo, query)
 };

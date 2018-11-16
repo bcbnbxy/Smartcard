@@ -4,14 +4,13 @@ App({
     version: "1.0",
     product: "fudao-mini-program",
      userInfo: null,
-     fudoUser: null
+     fudoUser: null,
+     cardUser:null
   },
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    var logs = wx.getStorageSync('logs') || [];
+    wx.setStorageSync('logs', logs);
     // // 登录
     // wx.login({
     //   success: res => {
@@ -41,3 +40,4 @@ App({
     // })
   }
 })
+
