@@ -1,24 +1,24 @@
 <view class="userinfo">
     <view class="userinfo-contaire">
         <view class="userinfo-contaire-left">
-            <image src="../../images/index/peoplehead.png"></image>
+            <image src="{{cardUser.tuser.wechatImg?cardUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}"></image>
         </view>
         <view class="userinfo-contaire-right">
             <view class="userinfo-contaire-righttitle">
-                <text>左文伟</text>
-                <text>首席服务官</text>
+                <text>{{cardUser.tuser.name?cardUser.tuser.name:cardUser.tuser.realName}}</text>
+                <text>{{cardUser.cardMiniUser.position?cardUser.cardMiniUser.position:"无"}}</text>
             </view>
             <view class="userinfo-contaire-rightitem">
                 <image src="../../images/index/telphone.png"></image>
-                <text>186821557078</text>
+                <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:0}}</text>
             </view>
             <view class="userinfo-contaire-rightitem">
                 <image src="../../images/index/WX.png"></image>
-                <text>linan1634555887</text>
+                <text>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
             </view>
             <view class="userinfo-contaire-rightitem">
                 <image src="../../images/index/address.png"></image>
-                <text>深圳市南山区软件产业基地6栋腾讯众创空间4F</text>
+                <text>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:"无"}}</text>
             </view>
         </view>
     </view>

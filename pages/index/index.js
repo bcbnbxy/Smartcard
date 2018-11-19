@@ -13,39 +13,7 @@ import {
 } from '../../utils/api.js'
 Page({
   onReady:function(e){
-    this.audioCtx = wx.createInnerAudioContext();
-    this.audioCtx.src=this.data.audio.src;
-    this.audioCtx.play();
-    setTimeout(() => {
-      this.audioCtx.duration;      
-      this.audioCtx.onTimeUpdate(() => {
-        this.audioCtx.pause();
-        let duration = this.audioCtx.duration
-        let str = parseInt(duration); // currentTime.toFixed(0)
-        let minute = parseInt(str / 60);
-        let second = parseInt(str % 60);
-        if (minute > 0 && minute < 60) {
-          this.setData({
-            ['audio.duration']: (minute < 10 ? '0' + minute : minute) + ':' + (second < 10 ? '0' + second : second)
-          })
-        } else {
-          if (second < 10 && second > 0) {
-            this.setData({
-              ['audio.duration']: '00:' + '0' + second
-            })
-          } else if (second <= 0) {
-            this.setData({
-              ['audio.duration']: '00:00'
-            })
-          } else {
-            this.setData({
-              ['audio.duration']: '00:' + second
-            })
-          }
-        }
-        this.audioCtx.offTimeUpdate();
-      })
-    },0)
+    
   },
   data: {
     recommentUserId: "",
@@ -98,7 +66,7 @@ Page({
       })
     } else {
       //1.直接搜索小程序进来的，如果是未注册用户或已注册的没有卡片权限的普通用户，首页显示小福的名片，如果是拥有卡片权限的人直接显示其名片信息。
-      //2.在拉取访客信息时，如果是普通用户并且在t_user表中不存在，注册时推荐人为小福。recommentid = 0;
+      //2.在获取访客信息时，如果是未注册用户，注册时推荐人为小福。recommentid = 0;
       this.setData({
         recommentUserId: "",
         cardUserId: "",
@@ -187,10 +155,11 @@ Page({
     })
   },
   saveaddresslist() { //存入手机通讯录
+  debugger
     var that = this;
     wx.addPhoneContact({
-      "firstName": that.data.peoplename,
-      "mobilePhoneNumber": that.data.phonenum
+      "firstName": that.data.cardUser.tuser.name,
+      "mobilePhoneNumber": that.data.cardUser.tuser.contactMobile
     })
   },
   getUserInfo: function(e) {
@@ -204,7 +173,7 @@ Page({
   onShareAppMessage: function() {
     return {
       title: '分享我的名片',
-      path: '/index/index?cardUserId=' + cardUserId
+      path: '/index/index?cardUserId=' + this.data.cardUserId
     }
   },
   playFun(){//播放音频
@@ -281,7 +250,7 @@ function login(that) {
                     app.userInfoReadyCallback(res)
                   }
                   if (that.data.recommentUserId == "" && that.data.cardUserId == "") {
-                    //直接搜索智能名片小程序进入名片的用户根据用户信息确定recommentUserId和cardUserId
+                    //直接搜索智能名片小程序进入名片的访客根据访客信息确定recommentUserId和cardUserId
                     getRecommentUserIdAndCardUserId({
                       js_code: that.code
                     }).then((res) => {
@@ -291,53 +260,15 @@ function login(that) {
                         recommentUserId: res.recommentUserId,
                         cardUserId: res.cardUserId,
                       })
-                      //获取卡片拥有者信息
-                      getCardOwnerInfo({
-                        cardUserId: that.data.cardUserId
-                      }).then((res) => {
-                        console.log(JSON.stringify(res));
-                        that.setData({
-                          cardUser: res,
-                          ['audio.src']: res.cardMiniUser? res.cardMiniUser.voice:'',
-                        })
-                        //注册|获取访客用户信息
-                        getUserMessage({
-                          recommendUserid: that.data.recommentUserId,
-                          code: "",
-                          userInfo: JSON.stringify(app.globalData.userInfo),
-                          unionid: unionid,
-                          openid: openid
-                        }).then((res) => {
-
-                          that.setData({
-                            fudoUser: res,
-                            hasfudoUser: true,
-                          })
-                        }).catch(err => console.log(err));
-                      }).catch(err => console.log(err));
+                      //获取cardUser和fudaoUser信息
+                      getcardUserAndfudaoUserInfo(that, unionid, openid);
                     }).catch(err => console.log(err));
+
                   } else {
-                    //获取卡片拥有者信息
-                    getCardOwnerInfo({
-                      cardUserId: that.data.cardUserId
-                    }).then((res) => {
-                      that.setData({
-                        cardUser: res
-                      })
-                      //注册|获取访客用户信息
-                      getUserMessage({
-                        recommendUserid: that.data.recommentUserId,
-                        code: that.code,
-                        userInfo: JSON.stringify(app.globalData.userInfo),
-                        unionid: "",
-                        openid: ""
-                      }).then((res) => {
-                        that.setData({
-                          fudoUser: res,
-                          hasfudoUser: true,
-                        })
-                      }).catch(err => console.log(err));
-                    }).catch(err => console.log(err));                   
+                    //从小程序码或名片方式进入的访客
+                    //获取cardUser和fudaoUser信息
+                    getcardUserAndfudaoUserInfo(that);
+                   
                   }
                 }
               })
@@ -351,6 +282,36 @@ function login(that) {
   })
 }
 
+function getcardUserAndfudaoUserInfo(that,unionid, openid) {
+ 
+  //获取卡片拥有者信息
+  getCardOwnerInfo({
+    cardUserId: that.data.cardUserId
+  }).then((res) => {
+    that.setData({
+      cardUser: res,
+      ['audio.src']:res.cardMiniUser.voice
+    })
+    app.globalData.cardUser = res;
+    audioSettings(that);
+    //注册|获取访客用户信息
+    getUserMessage({
+      recommendUserid: that.data.recommentUserId,
+      code: that.code,
+      userInfo: JSON.stringify(app.globalData.userInfo),
+      unionid: unionid,
+      openid: openid
+    }).then((res) => {
+      that.setData({
+        fudoUser: res,
+        hasfudoUser: true,
+      })
+      app.globalData.fudoUser = res;
+    }).catch(err => console.log(err));
+  }).catch(err => console.log(err));
+}
+
+
 /**
  * 生成小程序二维码
  */
@@ -363,7 +324,7 @@ function creaMiniQRCode(that, urls, scene) {
     wx.request({
       url: url,
       data: {
-        scene: scene,
+        scene: that.data.cardUserId,
         page: "pages/index/index"
       },
       method: "POST",
@@ -382,4 +343,46 @@ function creaMiniQRCode(that, urls, scene) {
     })
 
   }).catch(err => console.log(err));
+}
+
+
+/**
+ * 音频相关设置
+ * 
+ */
+function audioSettings(that) {
+ 
+  that.audioCtx = wx.createInnerAudioContext();
+  that.audioCtx.src = that.data.audio.src;
+  that.audioCtx.play();
+  setTimeout(() => {
+    that.audioCtx.duration;
+    that.audioCtx.onTimeUpdate(() => {
+      that.audioCtx.pause();
+      let duration = that.audioCtx.duration
+      let str = parseInt(duration); // currentTime.toFixed(0)
+      let minute = parseInt(str / 60);
+      let second = parseInt(str % 60);
+      if (minute > 0 && minute < 60) {
+        that.setData({
+          ['audio.duration']: (minute < 10 ? '0' + minute : minute) + ':' + (second < 10 ? '0' + second : second)
+        })
+      } else {
+        if (second < 10 && second > 0) {
+          that.setData({
+            ['audio.duration']: '00:' + '0' + second
+          })
+        } else if (second <= 0) {
+          that.setData({
+            ['audio.duration']: '00:00'
+          })
+        } else {
+          that.setData({
+            ['audio.duration']: '00:' + second
+          })
+        }
+      }
+      that.audioCtx.offTimeUpdate();
+    })
+  }, 0)
 }
