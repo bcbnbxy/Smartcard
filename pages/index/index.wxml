@@ -5,24 +5,24 @@
         <view class="topcontainer">
             <view class="topcontainer-content">
                 <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="../../images/index/peoplehead.png">
-                    <image src="{{fudoUser.tuser.wechatImg?fudoUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}"></image>
+                    <image src="{{cardUser.tuser.wechatImg?cardUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}"></image>
                 </view>
                 <view class="topcontainer-content-right fl">
                     <view class="title">
-                        <text>{{fudoUser.tuser.name?fudoUser.tuser.name:fudoUser.tuser.realName}}</text>
-                        <text>{{fudoUser.cardminiuser.position?fudoUser.cardminiuser.position:"无"}}</text>
+                        <text>{{cardUser.tuser.name?cardUser.tuser.name:cardUser.tuser.realName}}</text>
+                        <text>{{cardUser.cardMiniUser.position?cardUser.cardMiniUser.position:"无"}}</text>
                     </view>
                     <view class="item" bindtap='maskshow' data-item="1">
-                        <image src="../../images/index/telphone.png" data-phonenum="{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:0}}"></image>
-                        <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:"无"}}</text>
+                        <image src="../../images/index/telphone.png" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:0}}"></image>
+                        <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:"无"}}</text>
                     </view>
                     <view class="item">
                         <image src="../../images/index/WX.png"></image>
-                        <text>{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:"无"}}</text>
+                        <text>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
                     </view>
                     <view class="item">
                         <image src="../../images/index/address.png"></image>
-                        <text>{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:"无"}}</text>
+                        <text>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:"无"}}</text>
                     </view>
                 </view>
             </view>
@@ -36,26 +36,26 @@
             </view>
         </view>
         <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
-            <view class="slide-contaireitem">
-                <text>电话</text>
-                <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:0}}</text>
-                <text bindtap='maskshow' data-item="1" data-phonenum="{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:'无'}}">拨打</text>
-            </view>
-            <view class="slide-contaireitem">
-                <text>微信</text>
-                <text selectable='true' bindlongtap='copy'>{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:"无"}}</text>
-                <text data-copytext="{{fudoUser.tuser.wechatName?fudoUser.tuser.wechatName:'无'}}" bindtap="copy">复制</text>
-            </view>
-            <view class="slide-contaireitem">
-                <text>公司</text>
-                <text selectable='true' bindlongtap='copy'>{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:'无'}}</text>
-                <text data-copytext="{{fudoUser.cardminiuser.company?fudoUser.cardminiuser.company:'无'}}" bindtap="copy">复制</text>
-            </view>
-            <view class="slide-contaireitem">
-                <text>地址</text>
-                <text selectable='true' bindlongtap='copy'>{{fudoUser.cardminiuser.address?fudoUser.cardminiuser.address:'无'}}</text>
-                <text data-copytext="{{fudoUser.cardminiuser.address?fudoUser.cardminiuser.address:'无'}}" bindtap="copy">复制</text>
-            </view>
+          <view class="slide-contaireitem">
+            <text>电话</text>
+            <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:0}}</text>
+            <text bindtap='maskshow' data-item="1" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}">拨打</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>微信</text>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
+            <text data-copytext="{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:'无'}}" bindtap="copy">复制</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>公司</text>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}</text>
+            <text data-copytext="{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}" bindtap="copy">复制</text>
+          </view>
+          <view class="slide-contaireitem">
+            <text>地址</text>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}</text>
+            <text data-copytext="{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}" bindtap="copy">复制</text>
+          </view>
         </view>
         <view class="sharemingpian">
             <text bindtap='maskshow' data-item="2">分享名片</text>
@@ -101,9 +101,9 @@
     </view>
     <view class="mask" catchtouchmove='true' wx:if="{{maskshow}}" bindtap='hidemask'>
         <view class="masktel" catchtap="stopmask" wx:if="{{maskitem==1}}">
-            <text>{{fudoUser.tuser.userMobile?fudoUser.tuser.userMobile:'无'}}</text>
-            <text catchtap="callphone">呼叫</text>
-            <text catchtap='hidemask'>取消</text>
+          <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}</text>
+          <text catchtap="callphone">呼叫</text>
+          <text catchtap='hidemask'>取消</text>
         </view>
         <view class="maskshare" catchtap="stopmask" wx:if="{{maskitem==2}}">
             <text>分享到</text>

@@ -3,10 +3,14 @@
 const app = getApp()
 var urls = require('../../common/urls.js')
 var util = require('../../utils/util.js')
+
 import {
-  getUserbyUnionid,
+  cmsBroadCast,
+  getUserMessage,
   getAccessToken,
-  getWxacodeunlimit
+  getWxacodeunlimit,
+  getRecommentUserIdAndCardUserId,
+  getCardOwnerInfo
 } from '../../utils/api.js'
 Page({
   onReady:function(e){
@@ -46,9 +50,11 @@ Page({
   },
   data: {
     recommentUserId: "",
+    cardUserId: "",
     userInfo: {},
     hasUserInfo: false,
-    fudoUser: {},
+    fudoUser: {}, //访客
+    cardUser: {}, //卡片拥有人
     audio: {
       playState: false,
       src: 'http://p8i1x61e3.bkt.clouddn.com/1999bb1e9495972706b11170f52287be',
@@ -74,41 +80,55 @@ Page({
     wx.setNavigationBarTitle({
       title: "名片"
     });
-    var recommentUserId = decodeURIComponent(options.scene) ==='undefined' ? 0:decodeURIComponent(options.scene);
     var that = this;
+    var cardUserId = "";
+    if (options != null && options != undefined && options.scene) {
+      //小程序码方式进来
+      cardUserId = options.scene;
+      this.setData({
+        recommentUserId: cardUserId,
+        cardUserId: cardUserId,
+      })
+    } else if (options != null && options != undefined &&
+      options.cardUserId != null && options.cardUserId > 0) {
+      //分享名片页面方式进来
+      cardUserId = options.cardUserId;
+      this.setData({
+        recommentUserId: cardUserId,
+        cardUserId: cardUserId,
+      })
+    } else {
+      //1.直接搜索小程序进来的，如果是未注册用户或已注册的没有卡片权限的普通用户，首页显示小福的名片，如果是拥有卡片权限的人直接显示其名片信息。
+      //2.在拉取访客信息时，如果是普通用户并且在t_user表中不存在，注册时推荐人为小福。recommentid = 0;
+      this.setData({
+        recommentUserId: "",
+        cardUserId: "",
+      })
+    }
+
     if (app.globalData.userInfo) {
       this.setData({
-        recommentUserId: recommentUserId,
         userInfo: app.globalData.userInfo,
         hasUserInfo: true,
       })
     } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
-          recommentUserId: recommentUserId,
           userInfo: res.userInfo,
           hasUserInfo: true,
         })
       }
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
           this.setData({
-            recommentUserId: recommentUserId,
             userInfo: res.userInfo,
             hasUserInfo: true,
           })
         }
       })
     }
-    wx.setNavigationBarTitle({
-      title: "名片"
-    });
-    // creaMiniQRCode(this,urls,recommentUserId);
     login(that);
   },
   toggle() {
@@ -186,7 +206,7 @@ Page({
   onShareAppMessage: function() {
     return {
       title: '分享我的名片',
-      path: '/index/index'
+      path: '/index/index?cardUserId=' + cardUserId
     }
   },
   playFun(){//播放音频
@@ -242,8 +262,6 @@ Page({
     })
   },
 })
-
-
 /**
  * 登录
  */
@@ -263,15 +281,65 @@ function login(that) {
                   app.globalData.userInfo = res.userInfo
                   if (app.userInfoReadyCallback) {
                     app.userInfoReadyCallback(res)
-                  }                  
-                  //根据unionid查找登录用户信息
-                  getUserbyUnionid({ code: that.code, recommendUserid: that.data.recommentUserId, userInfo: JSON.stringify(res.userInfo) }).then( (res) =>{
-                    that.setData({
-                      fudoUser: res,
-                      hasfudoUser: true,
-                    })
-                    
-                  }).catch(err => console.log(err));
+                  }
+                  if (that.data.recommentUserId == "" && that.data.cardUserId == "") {
+                    //直接搜索智能名片小程序进入名片的用户根据用户信息确定recommentUserId和cardUserId
+                    getRecommentUserIdAndCardUserId({
+                      js_code: that.code
+                    }).then((res) => {
+                      var unionid = res.unionid;
+                      var openid = res.openid;
+                      that.setData({
+                        recommentUserId: res.recommentUserId,
+                        cardUserId: res.cardUserId,
+                      })
+                      //获取卡片拥有者信息
+                      getCardOwnerInfo({
+                        cardUserId: that.data.cardUserId
+                      }).then((res) => {
+
+                        that.setData({
+                          cardUser: res
+                        })
+                        //注册|获取访客用户信息
+                        getUserMessage({
+                          recommendUserid: that.data.recommentUserId,
+                          code: "",
+                          userInfo: JSON.stringify(app.globalData.userInfo),
+                          unionid: unionid,
+                          openid: openid
+                        }).then((res) => {
+
+                          that.setData({
+                            fudoUser: res,
+                            hasfudoUser: true,
+                          })
+                        }).catch(err => console.log(err));
+                      }).catch(err => console.log(err));
+                    }).catch(err => console.log(err));
+                  } else {
+                    //获取卡片拥有者信息
+                    getCardOwnerInfo({
+                      cardUserId: that.data.cardUserId
+                    }).then((res) => {
+                      that.setData({
+                        cardUser: res
+                      })
+                      //注册|获取访客用户信息
+                      getUserMessage({
+                        recommendUserid: that.data.recommentUserId,
+                        code: that.code,
+                        userInfo: JSON.stringify(app.globalData.userInfo),
+                        unionid: "",
+                        openid: ""
+                      }).then((res) => {
+                        that.setData({
+                          fudoUser: res,
+                          hasfudoUser: true,
+                        })
+                      }).catch(err => console.log(err));
+                    }).catch(err => console.log(err));                   
+                  }
                 }
               })
             }
