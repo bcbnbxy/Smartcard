@@ -1,5 +1,5 @@
 const app = getApp()
-const baseUrl = 'http://192.168.0.181:8080';
+const baseUrl = 'http://192.168.0.181:8088';
 const http = ({ url = '', param = {}, ...other } = {}) => {
   wx.showLoading({
     title: '加载中...'

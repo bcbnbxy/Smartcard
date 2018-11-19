@@ -9,11 +9,54 @@ import {
   getWxacodeunlimit
 } from '../../utils/api.js'
 Page({
+  onReady:function(e){
+    this.audioCtx = wx.createInnerAudioContext();
+    this.audioCtx.src=this.data.audio.src;
+    this.audioCtx.play();
+    setTimeout(() => {
+      this.audioCtx.duration;      
+      this.audioCtx.onTimeUpdate(() => {
+        this.audioCtx.pause();
+        let duration = this.audioCtx.duration
+        let str = parseInt(duration); // currentTime.toFixed(0)
+        let minute = parseInt(str / 60);
+        let second = parseInt(str % 60);
+        if (minute > 0 && minute < 60) {
+          this.setData({
+            ['audio.duration']: (minute < 10 ? '0' + minute : minute) + ':' + (second < 10 ? '0' + second : second)
+          })
+        } else {
+          if (second < 10 && second > 0) {
+            this.setData({
+              ['audio.duration']: '00:' + '0' + second
+            })
+          } else if (second <= 0) {
+            this.setData({
+              ['audio.duration']: '00:00'
+            })
+          } else {
+            this.setData({
+              ['audio.duration']: '00:' + second
+            })
+          }
+        }
+        this.audioCtx.offTimeUpdate();
+      })
+    },0)
+  },
   data: {
     recommentUserId: "",
     userInfo: {},
     hasUserInfo: false,
     fudoUser: {},
+    audio: {
+      playState: false,
+      src: 'http://p8i1x61e3.bkt.clouddn.com/1999bb1e9495972706b11170f52287be',
+      currentTime: '00:00',
+      duration: '00:00',
+      title:'我的语音介绍',
+      progressWidth:0
+    },
     hasfudoUser: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     toggleslide: true,
@@ -146,6 +189,58 @@ Page({
       path: '/index/index'
     }
   },
+  playFun(){//播放音频
+    var that=this;
+    this.audioCtx.play();
+    this.setData({
+      ['audio.playState']: true
+    });
+    setTimeout(() => {
+      this.audioCtx.currentTime;
+      this.audioCtx.onTimeUpdate(() => {
+        let duration = this.audioCtx.duration
+        let currentTime = this.audioCtx.currentTime;
+        let str =parseInt(currentTime); // currentTime.toFixed(0)
+        let minute = parseInt(str / 60);
+        let second = parseInt(str % 60);
+        if (minute > 0 && minute < 60) {
+          that.setData({
+            ['audio.currentTime']: (minute < 10 ? '0' + minute : minute) + ':' + (second < 10 ? '0' + second : second)
+          })
+        } else {
+          if (second < 10 && second > 0) {
+            that.setData({
+              ['audio.currentTime']: '00:' + '0' + second
+            })
+          } else if (second <= 0) {
+            that.setData({
+              ['audio.currentTime']: '00:00'
+            })
+          } else {
+            that.setData({
+              ['audio.currentTime']: '00:' + second
+            })
+          }
+        }
+        let d = 100 * currentTime / duration;
+        d = d.toFixed(1) > 100 ? 100 : d.toFixed(1);
+        this.setData({
+          ['audio.progressWidth']: d
+        });        
+      })
+      this.audioCtx.onEnded(() => {
+        this.setData({
+          ['audio.playState']: false
+        });
+      })
+    },0)    
+  },
+  paushFun() {//暂停音频
+    this.audioCtx.pause();
+    this.setData({
+      ['audio.playState']:false
+    })
+  },
 })
 
 
@@ -175,6 +270,7 @@ function login(that) {
                       fudoUser: res,
                       hasfudoUser: true,
                     })
+                    
                   }).catch(err => console.log(err));
                 }
               })
@@ -192,9 +288,6 @@ function login(that) {
  * 生成小程序二维码
  */
 function creaMiniQRCode(that, urls, scene) {
-  console.log(that);
-  console.log(urls);
-  console.log(scene);
   //先获取access_token
   getAccessToken().then((res) => {
     var access_token = res;

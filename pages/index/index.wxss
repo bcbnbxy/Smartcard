@@ -81,6 +81,8 @@ page{
 }
 .slide-contaire{
   height:auto;
+  width:100%;
+  box-sizing: border-box;
   padding:20rpx 40rpx;
   transition: all 0.3s;
 }
@@ -275,7 +277,7 @@ page{
 
 }
 .progess-box > view {
-  background-color: #ff505e;
+  background-color: #14AB13;
   height: 6rpx;
   position: absolute;
   z-index: 8;
