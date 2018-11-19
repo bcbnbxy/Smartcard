@@ -3,7 +3,6 @@
 const app = getApp()
 var urls = require('../../common/urls.js')
 var util = require('../../utils/util.js')
-
 import {
   cmsBroadCast,
   getUserMessage,
@@ -57,7 +56,7 @@ Page({
     cardUser: {}, //卡片拥有人
     audio: {
       playState: false,
-      src: 'http://p8i1x61e3.bkt.clouddn.com/1999bb1e9495972706b11170f52287be',
+      src: '',
       currentTime: '00:00',
       duration: '00:00',
       title:'我的语音介绍',
@@ -141,12 +140,10 @@ Page({
     if (e.currentTarget.dataset.item == 1) {
       this.setData({
         "maskitem": e.currentTarget.dataset.item,
-        "phonenum": e.currentTarget.dataset.phonenum
       })
     } else if (e.currentTarget.dataset.item == 3) {
       this.setData({
         "maskitem": e.currentTarget.dataset.item,
-        "headimg": e.currentTarget.dataset.headimg
       })
     } else if (e.currentTarget.dataset.item == 2) {
       this.setData({
@@ -182,10 +179,11 @@ Page({
       }
     })
   },
-  callphone() { //拨打电话
+  callphone(e) { //拨打电话
     var that = this;
+    console.log(e.currentTarget.dataset.phonenum);
     wx.makePhoneCall({
-      phoneNumber: that.data.phonenum //电话号码
+      phoneNumber: e.currentTarget.dataset.phonenum //电话号码
     })
   },
   saveaddresslist() { //存入手机通讯录
@@ -297,9 +295,10 @@ function login(that) {
                       getCardOwnerInfo({
                         cardUserId: that.data.cardUserId
                       }).then((res) => {
-
+                        console.log(JSON.stringify(res));
                         that.setData({
-                          cardUser: res
+                          cardUser: res,
+                          ['audio.src']: res.cardMiniUser? res.cardMiniUser.voice:'',
                         })
                         //注册|获取访客用户信息
                         getUserMessage({
