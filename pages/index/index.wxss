@@ -108,14 +108,6 @@ page{
   font-size:28rpx;
   color:#353535;
 }
-/* .slide-contaireitem button:nth-child(3){
-  border:1rpx solid #1AAD19;
-  color:#1AAD19;
-  font-size:24rpx;
-  text-align: center;
-  border-radius: 10rpx;
-  padding:0rpx 16rpx;
-} */
 .sharemingpian{
   width:100%;
   height:140rpx;
@@ -297,7 +289,6 @@ page{
   display: flex;
   justify-content: space-between;
 }
-
 .mask{
   width:100%;
   height:100%;
@@ -305,7 +296,7 @@ page{
   position: fixed;
   left:0;
   top:0;
-  z-index: 1000;
+  z-index: 1001;
   overflow: hidden;
 }
 .masktel{

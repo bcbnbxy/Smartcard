@@ -40,9 +40,16 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "scene",
+					"name": "小程序码入口",
 					"pathName": "pages/index/index",
-					"query": "scene=705933"
+					"query": "scene=705933",
+					"scene": "1012"
+				},
+				{
+					"id": -1,
+					"name": "分享页面入口",
+					"pathName": "pages/index/index",
+					"query": "cardUserId=705933"
 				}
 			]
 		}

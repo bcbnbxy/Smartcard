@@ -1,1 +1,7 @@
-<web-view src="https://test.fudaojt.com/home/index"></web-view>
+<!-- <web-view src="https://test.fudaojt.com/home/index?token={{token}}"></web-view> -->
+<!-- <web-view src="{{url}}"></web-view> -->
+<import src="../../components/tabbar/tabbar.wxml"/> 
+<view class="contaire">
+    <web-view src="{{url}}"></web-view>    
+</view>
+<template is="tabBar" data="{{tabBar}}"/>

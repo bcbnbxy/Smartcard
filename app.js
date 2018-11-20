@@ -5,7 +5,52 @@ App({
     product: "fudao-mini-program",
      userInfo: null,
      fudoUser: null,
-     cardUser:null
+     cardUser:null,
+     tabBar: {
+      "color": "#9E9E9E",
+      "selectedColor": "#f00",
+      "backgroundColor": "#fff",
+      "borderStyle": "#ccc",
+      "list": [
+        {
+          "pagePath": "/pages/index/index",
+          "text": "名片",
+          "iconPath": "/images/index/index.png",
+          "selectedIconPath": "/images/index/indexactive.png",
+          "clas": "menu-item",
+          "selectedColor": "#1AAD19",
+          active: true
+        },
+        {
+          "pagePath": "/pages/mall/mallindex",
+          "text": "商城",
+          "iconPath": "/images/index/markt.png",
+          "selectedIconPath": "/images/index/marktactive.png",
+          "selectedColor": "#1AAD19",
+          "clas": "menu-item",
+          active: false
+        },
+        {
+          "pagePath": "/pages/student/student",
+          "text": "学员分享",
+          "iconPath": "/images/index/student.png",
+          "selectedIconPath": "/images/index/studentshare.png",
+          "selectedColor": "#1AAD19",
+          "clas": "menu-item",
+          active: false
+        },
+        {
+          "pagePath": "/pages/company/company",
+          "text": "公司介绍",
+          "iconPath": "/images/index/company.png",
+          "selectedIconPath": "/images/index/companyactive.png",
+          "selectedColor": "#1AAD19",
+          "clas": "menu-item",
+          active: false
+        }
+      ],
+      "position": "bottom"
+    },
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -38,6 +83,25 @@ App({
     //     }
     //   }
     // })
+  },
+  editTabBar: function () {
+    //使用getCurrentPages可以获取当前加载中所有的页面对象的一个数组，数组最后一个就是当前页面。
+    var curPageArr = getCurrentPages();    //获取加载的页面
+    var curPage = curPageArr[curPageArr.length - 1];    //获取当前页面的对象
+    var pagePath = curPage.route;    //当前页面url
+    if (pagePath.indexOf('/') != 0) {
+      pagePath = '/' + pagePath;
+    }
+    var tabBar = this.globalData.tabBar;
+    for (var i = 0; i < tabBar.list.length; i++) {
+      tabBar.list[i].active = false;
+      if (tabBar.list[i].pagePath == pagePath) {
+        tabBar.list[i].active = true;    //根据页面地址设置当前页面状态    
+      }
+    }
+    curPage.setData({
+      tabBar: tabBar
+    });
   }
 })
 

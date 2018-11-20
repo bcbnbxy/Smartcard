@@ -56,3 +56,38 @@ page{
   white-space:nowrap;
 
 }
+
+.menu-item{  
+  width: 25%;
+  height:100%;  
+ display: flex;
+ flex-direction:column;
+ align-items: center; 
+ justify-content: space-around;
+ font-size:24rpx;  
+}  
+.menu-item:nth-child(1) .img{ 
+  width:75rpx;
+  height:60rpx;  
+}
+.menu-item:nth-child(2) .img{ 
+  width:72rpx;
+  height:60rpx;  
+}
+.menu-item:nth-child(3) .img{ 
+  width:60rpx;
+  height:66rpx;  
+}
+.menu-item:nth-child(4) .img{ 
+  width:68rpx;
+  height:60rpx;  
+}  
+.tab-bar{  
+  position: fixed;
+  z-index:1000;  
+  width: 100%;  
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  height:110rpx;  
+} 

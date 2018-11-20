@@ -1,7 +1,8 @@
 <!--index.wxml-->
+<import src="../../components/tabbar/tabbar.wxml"/> 
 <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 授权登录 </button>
 <block wx:else>
-    <view class="container">
+    <view class="container" style="padding-bottom:110rpx;">
         <view class="topcontainer">
             <view class="topcontainer-content">
                 <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="{{cardUser.tuser.wechatImg?cardUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}">
@@ -38,23 +39,29 @@
         <view class="{{toggleslide?'slide-contaire':'slide-contairehide'}}">
           <view class="slide-contaireitem">
             <text>电话</text>
-            <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:0}}</text>
-            <button bindtap='maskshow' plain="true" disabled='{{cardUser.tuser.userMobile?"":true}}'  type="primary"  size="mini"  data-item="1" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}">拨打</button>
+
+            <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}</text>
+            <button bindtap='maskshow' plain="true" disabled='{{cardUser.tuser.userMobile?"":true}}' type="primary" size="mini" data-item="1" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}">拨打</button>
+
           </view>
           <view class="slide-contaireitem">
             <text>微信</text>
             <text selectable='true' bindlongtap='copy'>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
+
             <button size="mini" disabled='{{cardUser.tuser.wechatName?"":true}}' plain="true" type="primary" data-copytext="{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:'无'}}" bindtap="copy">复制</button>
+
           </view>
           <view class="slide-contaireitem">
             <text>公司</text>
             <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}</text>
-            <button size="mini"  type="primary" plain="true" disabled='{{cardUser.cardMiniUser.company?"":true}}' data-copytext="{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}" bindtap="copy">复制</button>
+
+            <button size="mini" disabled='{{cardUser.cardMiniUser.company?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}" bindtap="copy">复制</button>
+
           </view>
           <view class="slide-contaireitem">
             <text>地址</text>
             <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}</text>
-            <button size="mini" type="primary" plain="true" disabled='{{cardUser.cardMiniUser.address?"":true}}' data-copytext="{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}" bindtap="copy">复制</button>
+            <button size="mini"  disabled='{{cardUser.cardMiniUser.address?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}" bindtap="copy">复制</button>
           </view>
         </view>
         <view class="sharemingpian">
@@ -126,5 +133,6 @@
         </view>
     </view>
     <zixun/>
+    <template is="tabBar" data="{{tabBar}}"/>
     </block>
     

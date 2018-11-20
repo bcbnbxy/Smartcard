@@ -12,37 +12,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "智慧名片",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#BEC2CC",
-    "selectedColor": "#1AAD19",
-    "borderStyle": "black",
-    "backgroundColor": "#fff",
-    "list": [
-      {
-        "iconPath": "images/index/index.png",
-        "selectedIconPath": "images/index/indexactive.png",
-        "pagePath": "pages/index/index",
-        "text": "名片"
-      },
-      {
-        "iconPath": "images/index/markt.png",
-        "selectedIconPath": "images/index/marktactive.png",
-        "pagePath": "pages/mall/mallindex",
-        "text": "商城"
-      },
-      {
-        "iconPath": "images/index/student.png",
-        "selectedIconPath": "images/index/studentshare.png",
-        "pagePath": "pages/student/student",
-        "text": "学员分享"
-      },
-      {
-        "iconPath": "images/index/company.png",
-        "selectedIconPath": "images/index/companyactive.png",
-        "pagePath": "pages/company/company",
-        "text": "公司介绍"
-      }
-    ]
   }
 }
