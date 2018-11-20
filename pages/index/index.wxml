@@ -5,25 +5,25 @@
     <view class="container" style="padding-bottom:110rpx;">
         <view class="topcontainer">
             <view class="topcontainer-content">
-                <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="{{cardUser.tuser.wechatImg?cardUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}">
-                    <image src="{{cardUser.tuser.wechatImg?cardUser.tuser.wechatImg:'../../images/index/peoplehead.png'}}"></image>
+                <view class="topcontainer-content-left fl" bindtap="maskshow" data-item="3" data-headimg="{{cardUser.tuser.wechatImg}}">
+                    <image src="{{cardUser.tuser.wechatImg}}"></image>
                 </view>
                 <view class="topcontainer-content-right fl">
                     <view class="title">
                         <text>{{cardUser.tuser.name?cardUser.tuser.name:cardUser.tuser.realName}}</text>
-                        <text>{{cardUser.cardMiniUser.position?cardUser.cardMiniUser.position:"无"}}</text>
+                        <text>{{cardUser.cardMiniUser.position?cardUser.cardMiniUser.position:""}}</text>
                     </view>
                     <view class="item" bindtap='maskshow' data-item="1">
                         <image src="../../images/index/telphone.png" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:0}}"></image>
-                        <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:"无"}}</text>
+                        <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:""}}</text>
                     </view>
                     <view class="item">
                         <image src="../../images/index/WX.png"></image>
-                        <text>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
+                        <text>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:""}}</text>
                     </view>
                     <view class="item">
                         <image src="../../images/index/address.png"></image>
-                        <text>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:"无"}}</text>
+                        <text>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:""}}</text>
                     </view>
                 </view>
             </view>
@@ -40,28 +40,28 @@
           <view class="slide-contaireitem">
             <text>电话</text>
 
-            <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}</text>
-            <button bindtap='maskshow' plain="true" disabled='{{cardUser.tuser.userMobile?"":true}}' type="primary" size="mini" data-item="1" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}">拨打</button>
+            <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:''}}</text>
+            <button bindtap='maskshow' plain="true" disabled='{{cardUser.tuser.userMobile?"":true}}' type="primary" size="mini" data-item="1" data-phonenum="{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:''}}">拨打</button>
 
           </view>
           <view class="slide-contaireitem">
             <text>微信</text>
-            <text selectable='true' bindlongtap='copy'>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:"无"}}</text>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:""}}</text>
 
-            <button size="mini" disabled='{{cardUser.tuser.wechatName?"":true}}' plain="true" type="primary" data-copytext="{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:'无'}}" bindtap="copy">复制</button>
+            <button size="mini" disabled='{{cardUser.tuser.wechatName?"":true}}' plain="true" type="primary" data-copytext="{{cardUser.tuser.wechatName?cardUser.tuser.wechatName:''}}" bindtap="copy">复制</button>
 
           </view>
           <view class="slide-contaireitem">
             <text>公司</text>
-            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}</text>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:''}}</text>
 
-            <button size="mini" disabled='{{cardUser.cardMiniUser.company?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:'无'}}" bindtap="copy">复制</button>
+            <button size="mini" disabled='{{cardUser.cardMiniUser.company?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.company?cardUser.cardMiniUser.company:''}}" bindtap="copy">复制</button>
 
           </view>
           <view class="slide-contaireitem">
             <text>地址</text>
-            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}</text>
-            <button size="mini"  disabled='{{cardUser.cardMiniUser.address?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:'无'}}" bindtap="copy">复制</button>
+            <text selectable='true' bindlongtap='copy'>{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:''}}</text>
+            <button size="mini"  disabled='{{cardUser.cardMiniUser.address?"":true}}' type="primary" plain="true" data-copytext="{{cardUser.cardMiniUser.address?cardUser.cardMiniUser.address:''}}" bindtap="copy">复制</button>
           </view>
         </view>
         <view class="sharemingpian">
@@ -74,7 +74,7 @@
                 <text>ABOUT</text>
             </view>
             <view class="about-content">
-                <text>{{cardUser.tuser.comment?cardUser.tuser.comment:"无"}}</text>
+                <text>{{cardUser.tuser.comment?cardUser.tuser.comment:""}}</text>
             </view>
         </view>
         <view class="voice">
@@ -106,7 +106,7 @@
     </view>
     <view class="mask" catchtouchmove='true' wx:if="{{maskshow}}" bindtap='hidemask'>
         <view class="masktel" catchtap="stopmask" wx:if="{{maskitem==1}}">
-          <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:'无'}}</text>
+          <text>{{cardUser.tuser.userMobile?cardUser.tuser.userMobile:''}}</text>
           <text catchtap="callphone" data-phonenum="{{cardUser.tuser.userMobile}}">呼叫</text>
           <text catchtap='hidemask'>取消</text>
         </view>

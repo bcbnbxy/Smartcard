@@ -148,7 +148,7 @@ Page({
   onShareAppMessage: function() {
     return {
       title: '分享我的名片',
-      path: '/index/index?cardUserId=' + this.data.cardUserId
+      path: 'pages/index/index?cardUserId=' + this.data.cardUserId
     }
   },
   playFun(){//播放音频
@@ -257,14 +257,15 @@ function login(that) {
   })
 }
 
-function getcardUserAndfudaoUserInfo(that,unionid, openid) { 
+function getcardUserAndfudaoUserInfo(that,unionid, openid) {
+ 
   //获取卡片拥有者信息
   getCardOwnerInfo({
     cardUserId: that.data.cardUserId
   }).then((res) => {
     that.setData({
       cardUser: res,
-      ['audio.src']:'http://p8i1x61e3.bkt.clouddn.com/woman/mp3/WomanFirstFirst.mp3'
+      ['audio.src']:res.cardUser.voice
     })
     app.globalData.cardUser = res;
     audioSettings(that);
@@ -324,7 +325,8 @@ function creaMiniQRCode(that, urls, scene) {
  * 音频相关设置
  * 
  */
-function audioSettings(that) { 
+function audioSettings(that) {
+ 
   that.audioCtx = wx.createInnerAudioContext();
   that.audioCtx.src = that.data.audio.src;
   that.audioCtx.play();
