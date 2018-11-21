@@ -25,7 +25,7 @@ Page({
     var recorderManager = wx.getRecorderManager()
     var innerAudioContext = wx.createInnerAudioContext()
     const options = {
-      duration: 10000, //指定录音的时长，单位 ms
+      duration: 600000, //指定录音的时长，单位 ms
       sampleRate: 16000, //采样率
       numberOfChannels: 1, //录音通道数
       encodeBitRate: 96000, //编码码率
@@ -69,7 +69,7 @@ Page({
       console.log('停止录音', res.tempFilePath)
       setTimeout(function() {
         debugger
-        var urls = "http://localhost:8088/file/upload";
+        var urls = "http://localhost:8088/file/upload2";
 
         console.log(s.tempFilePath);
 

@@ -20,7 +20,7 @@
     </view>
     <view class="charttopnav-footer">
         <image src="../../../images/index/dianhua.png"></image>
-        <text>拨打我的电话</text>
+        <text bindtap="callphone">拨打我的电话</text>
     </view>
   </view>
   <view class="chartlist">
@@ -69,7 +69,7 @@
 <view class="chartinput">
     <view class="chartinput-top">
       <view class="chartinput-toptitle">
-        我想<text>加微信</text> <text>拨打电话</text> <text>保存名片码</text>
+        我想<text bindtap="copyWechatNum">加微信</text> <text bindtap="calling">拨打电话</text>
       </view>
       <view class="chartinput-topinput">
           <input type='text' placeholder='请输入您想咨询的问题'></input>

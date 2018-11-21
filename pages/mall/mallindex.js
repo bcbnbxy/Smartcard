@@ -16,7 +16,7 @@ Page({
     // console.log(JSON.stringify(getApp().globalData.fudoUser.authorization))
     getApp().editTabBar();
     this.setData({
-      url: 'http://192.168.0.103:8081/home/index?miintoken='+getApp().globalData.fudoUser.authorization
+      url: 'http://192.168.0.181:8081/home/index?minitoken='+getApp().globalData.fudoUser.authorization
     })
   },
 

@@ -1,19 +1,25 @@
 // pages/index/chart/chart.js
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-        choosepictureshow:false
+        choosepictureshow:false,
+        cardUser: {}, //卡片拥有人
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      cardUser: app.globalData.cardUser
+    })
     wx.setNavigationBarTitle({
-      title: "左文伟"
+      title: this.data.cardUser
     });
   },
 
@@ -85,5 +91,29 @@ Page({
         })
       }
     })
+  },
+  copyWechatNum(e) { //复制微信号
+    var that = this;
+    wx.setClipboardData({
+      //准备复制的数据
+      data: this.data.cardUser.tuser.wechatId ? this.data.cardUser.tuser.wechatId:"",
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+        });
+      }
+    })
+  },
+  calling: function () { //拨打电话
+    wx.makePhoneCall({
+      phoneNumber: this.data.cardUser.tuser.userMobile,
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
   }
+
 })
